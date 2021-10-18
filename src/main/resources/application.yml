@@ -1,4 +1,4 @@
 server:
-  port: ${CLUB_PORT:8080}
+  port: ${CLUB_PORT:8090}
   servlet:
-    context-path: ${SERVLET_CONTEXT_PATH:/club}
+    context-path: ${SERVLET_CONTEXT_PATH:/}
