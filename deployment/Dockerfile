@@ -1,7 +1,9 @@
-FROM openjdk:8-jdk-alpine
-
+FROM openjdk:8-jre-alpine
+ENV APP_FILE app.jar
+ENV APP_HOME /usr/apps
 EXPOSE 8080
-
-ADD /build/libs/club-server-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY target/*.jar $APP_HOME/$APP_FILE
+WORKDIR $APP_HOME
+#ENTRYPOINT ["sh", "-c"]
+#CMD ["exec java -jar $APP_FILE"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
