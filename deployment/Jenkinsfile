@@ -52,7 +52,7 @@ podTemplate(
 		}
 
 		//-- 환경변수 파일 읽어서 변수값 셋팅
-		def props = readProperties  file:"./deployment-k8s/pipeline-icp.properties"  // __custom__
+		def props = readProperties  file:"./deployment/pipeline.properties"  // __custom__
 		def tag = props["version"]
 		def dockerRegistry = props["dockerRegistry"]
 		def credentialRegistry=props["credentialRegistry"]
