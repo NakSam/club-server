@@ -122,7 +122,7 @@ podTemplate(
 				container("docker") {
 					echo "test"
 					docker.withRegistry("${dockerRegistry}", "${credentialRegistry}") {
-						echo "docker build -f ${baseDir}${baseDeployDir}/Dockerfile -t ${image}:${tag} ${WORKSPACE}"
+						echo "test2"
 						sh "docker build -f ${baseDir}${baseDeployDir}/Dockerfile -t ${image}:${tag} ${WORKSPACE}"
 						sh "docker push ${image}:${tag}"
 						sh "docker tag ${image}:${tag} ${image}:latest"
