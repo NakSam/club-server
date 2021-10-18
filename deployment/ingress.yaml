@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: club-svc
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - secretName: tls-secret
+  rules:
+    - http:
+        paths:
+          - path: /club
+            pathType: Prefix
+            backend:
+              service:
+                name: club
+                port:
+                  number: 8080
