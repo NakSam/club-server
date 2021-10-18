@@ -120,6 +120,7 @@ podTemplate(
 			stage(stageName) {
 				echo "**** START : " + stageName
 				container("docker") {
+					echo "test"
 					docker.withRegistry("${dockerRegistry}", "${credentialRegistry}") {
 						echo "docker build -f ${baseDir}${baseDeployDir}/Dockerfile -t ${image}:${tag} ${WORKSPACE}"
 						sh "docker build -f ${baseDir}${baseDeployDir}/Dockerfile -t ${image}:${tag} ${WORKSPACE}"
