@@ -36,10 +36,16 @@ public class ClubQueryRepository{
      }
 
      private BooleanExpression locationEq(Location location){
+          if(location.isLocation("전체")){
+               return null;
+          }
           return club.location.eq(location);
      }
 
      private BooleanExpression categoryEq(Category category){
+          if(category.isCategory("전체")){
+               return null;
+          }
           return club.category.eq(category);
      }
 

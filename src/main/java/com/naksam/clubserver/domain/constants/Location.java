@@ -3,6 +3,7 @@ package com.naksam.clubserver.domain.constants;
 import java.util.Arrays;
 
 public enum Location {
+    ALL("전체"),
     GANGNAMGU("강남구"),
     GANGDONGGU("강동구"),
     GANGSEOGU("강서구"),
@@ -17,6 +18,10 @@ public enum Location {
 
     public String getLocationName() {
         return locationName;
+    }
+
+    public Boolean isLocation(String locationName){
+        return this.locationName.equals(locationName);
     }
 
     public static Location fromString(String locationName) {
