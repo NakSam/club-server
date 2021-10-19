@@ -4,10 +4,10 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.naksam.clubserver.domain.entity.Club;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.naksam.clubserver.domain.Club;
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.domain.objects.ClubName;
