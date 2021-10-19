@@ -23,7 +23,7 @@ public class ClubController {
         return ResponseEntity.ok(responses);
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<?> registerClub(@RequestBody RegisterClub registerClub) {
         Long id = clubService.registerClub(registerClub);
         return ResponseEntity.ok(id);
