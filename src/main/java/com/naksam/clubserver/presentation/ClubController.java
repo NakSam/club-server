@@ -45,7 +45,7 @@ public class ClubController {
 
     @PostMapping("/feign")
     public ResponseEntity<?> feign() {
-        Response response = exampleClient.request(new MemberPayload(1L, "test@test.com"));
+        Object response = exampleClient.request(new MemberPayload(1L, "test@test.com"));
         return ResponseEntity.ok(response);
     }
 }

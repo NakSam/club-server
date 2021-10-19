@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface ExampleClient {
 
     @PostMapping(value = "/create")
-    Response request(@RequestBody MemberPayload memberPayload);
+    Object request(@RequestBody MemberPayload memberPayload);
 }
