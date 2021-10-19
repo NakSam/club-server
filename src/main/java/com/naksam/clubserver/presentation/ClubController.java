@@ -3,6 +3,7 @@ package com.naksam.clubserver.presentation;
 import com.naksam.clubserver.config.ExampleClient;
 import com.naksam.clubserver.config.RetryClient;
 import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.JsonWebToken;
 import com.naksam.clubserver.dto.MemberPayload;
 import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
@@ -43,9 +44,15 @@ public class ClubController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/feign")
-    public ResponseEntity<?> feign() {
+    @PostMapping("/createToken")
+    public ResponseEntity<?> createToken() {
         Object response = exampleClient.request(new MemberPayload(1L, "test@test.com"));
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/validateToken")
+    public ResponseEntity<?> validateToken(@RequestBody JsonWebToken jsonWebToken) {
+        Object response = exampleClient.request(jsonWebToken);
         return ResponseEntity.ok(response);
     }
 }
