@@ -7,7 +7,7 @@ data:
   SERVLET_CONTEXT_PATH: /club
   CLUB_PORT: 8080
   # DB INFO
-  DB_SERVER: mysql.mysql
+  DB_SERVER: mysql
   DB_PORT: "3306"
   DB_NAME: club
   DB_USERNAME: root
