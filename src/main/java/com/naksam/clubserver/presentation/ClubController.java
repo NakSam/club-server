@@ -1,8 +1,11 @@
 package com.naksam.clubserver.presentation;
 
+import com.naksam.clubserver.config.ExampleClient;
 import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.MemberPayload;
 import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
+import feign.Response;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -15,6 +18,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubController {
     private ClubService clubService;
+    private ExampleClient exampleClient;
 
     @GetMapping(params = {"location", "category", "clubname"})
     public ResponseEntity<List<ClubListResponse>> search(
@@ -36,5 +40,11 @@ public class ClubController {
     public ResponseEntity<?> joinClub(@PathVariable Long clubId) {
         clubService.join(clubId);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/feign")
+    public ResponseEntity<?> feign() {
+        Response response = exampleClient.request(new MemberPayload(1L, "test@test.com"));
+        return ResponseEntity.ok(response);
     }
 }
