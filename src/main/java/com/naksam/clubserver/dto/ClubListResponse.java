@@ -1,6 +1,8 @@
 package com.naksam.clubserver.dto;
 
 import com.naksam.clubserver.domain.Club;
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 
 public class ClubListResponse {
 
@@ -28,8 +30,8 @@ public class ClubListResponse {
         this.name = club.getName();
         this.memberNum = club.getMemberNum();
         this.maxMemberNum = club.getMaxMemberNum();
-        this.category = club.getCategory();
-        this.location = club.getLocation();
+        this.category = club.getCategory().getCategoryName();
+        this.location = club.getLocation().getLocationName();
     }
 
 

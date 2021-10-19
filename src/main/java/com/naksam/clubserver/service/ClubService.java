@@ -1,6 +1,8 @@
 package com.naksam.clubserver.service;
 
 import com.naksam.clubserver.domain.ClubDomain;
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.dto.ClubListResponse;
 import com.naksam.clubserver.dto.RegisterClub;
 import lombok.AllArgsConstructor;
@@ -15,8 +17,8 @@ import java.util.stream.Collectors;
 public class ClubService {
     private ClubDomain clubDomain;
 
-    public List<ClubListResponse> search(String location, String category) {
-        return clubDomain.search(location, category)
+    public List<ClubListResponse> search(String location, String category, String clubname) {
+        return clubDomain.search(Location.fromString(location), Category.fromString(category), clubname)
                 .stream()
                 .map(ClubListResponse::new)
                 .collect(Collectors.toList());
