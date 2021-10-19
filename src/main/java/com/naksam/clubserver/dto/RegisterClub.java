@@ -3,6 +3,8 @@ package com.naksam.clubserver.dto;
 import com.naksam.clubserver.domain.Club;
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
+import com.naksam.clubserver.domain.objects.ClubName;
+import com.naksam.clubserver.domain.objects.MemberNumber;
 import lombok.Data;
 
 @Data
@@ -11,9 +13,9 @@ public class RegisterClub {
 
     private Long ownerId;
 
-    private Long memberNum;
+    private Integer memberNum;
 
-    private Long maxMemberNum;
+    private Integer maxMemberNum;
 
     private String category;
 
@@ -21,9 +23,8 @@ public class RegisterClub {
 
     public Club entity() {
         return Club.builder()
-                .name(name)
-                .memberNum(memberNum)
-                .maxMemberNum(maxMemberNum)
+                .name(new ClubName(name))
+                .memberNumber(new MemberNumber(maxMemberNum))
                 .category(Category.fromString(category))
                 .location(Location.fromString(location))
                 .build();
