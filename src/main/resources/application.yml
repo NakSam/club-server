@@ -26,7 +26,7 @@ spring:
       connection-test-query: SELECT 1
 
 
-  data:
-    jpa:
-      repositories:
-        enabled: false
+#  data:
+#    jpa:
+#      repositories:
+#        enabled: false
