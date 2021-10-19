@@ -6,16 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.naksam.clubserver.data.ClubRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClubDomain {
-
-    public ClubDomain() {
-    }
-
-    public ClubDomain(ClubRepository clubRepository) {
-        this.clubRepository = clubRepository;
-    }
 
     private ClubRepository clubRepository;
 
