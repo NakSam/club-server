@@ -16,3 +16,14 @@ spring:
         default_batch_fetch_size: 1000
     hibernate:
       ddl-auto: create
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_SERVER:169.56.174.138}:${DB_PORT:31922}/${DB_NAME:club}?useUnicode=true&characterEncoding=utf-8
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 30
+      minimum-idle: 2
+      connection-test-query: SELECT 1
