@@ -1,13 +1,11 @@
 package com.naksam.clubserver.presentation;
 
-import com.naksam.clubserver.config.ExampleClient;
-import com.naksam.clubserver.config.RetryClient;
+import com.naksam.clubserver.feign.RetryClient;
 import com.naksam.clubserver.dto.ClubListResponse;
 import com.naksam.clubserver.dto.JsonWebToken;
 import com.naksam.clubserver.dto.MemberPayload;
 import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
-import feign.Response;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;

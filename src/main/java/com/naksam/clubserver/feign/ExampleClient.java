@@ -1,5 +1,6 @@
-package com.naksam.clubserver.config;
+package com.naksam.clubserver.feign;
 
+import com.naksam.clubserver.config.HeaderConfiguration;
 import com.naksam.clubserver.dto.JsonWebToken;
 import com.naksam.clubserver.dto.MemberPayload;
 import org.springframework.cloud.openfeign.FeignClient;

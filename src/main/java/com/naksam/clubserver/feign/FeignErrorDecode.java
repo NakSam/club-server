@@ -1,4 +1,4 @@
-package com.naksam.clubserver.config;
+package com.naksam.clubserver.feign;
 
 import feign.Response;
 import feign.RetryableException;

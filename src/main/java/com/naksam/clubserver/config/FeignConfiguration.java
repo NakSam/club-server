@@ -1,5 +1,6 @@
 package com.naksam.clubserver.config;
 
+import com.naksam.clubserver.feign.FeignErrorDecode;
 import feign.codec.ErrorDecoder;
 import org.springframework.cloud.openfeign.FeignFormatterRegistrar;
 import org.springframework.context.annotation.Bean;
