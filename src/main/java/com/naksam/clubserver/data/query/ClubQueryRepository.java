@@ -1,8 +1,8 @@
-package com.naksam.clubserver.data;
+package com.naksam.clubserver.data.query;
 
-import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
+import com.naksam.clubserver.domain.entity.Club;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.naksam.clubserver.domain.QClub.club;
+import static com.naksam.clubserver.domain.entity.QClub.club;
 
 @Repository
 @AllArgsConstructor

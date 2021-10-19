@@ -1,6 +1,6 @@
 package com.naksam.clubserver.domain;
 
-import com.naksam.clubserver.data.ClubQueryRepository;
+import com.naksam.clubserver.data.query.ClubQueryRepository;
 import com.naksam.clubserver.data.ClubRepository;
 import com.naksam.clubserver.data.UserRepository;
 import com.naksam.clubserver.domain.constants.Category;
