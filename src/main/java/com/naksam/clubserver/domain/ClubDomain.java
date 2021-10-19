@@ -9,12 +9,16 @@ import com.naksam.clubserver.data.ClubRepository;
 
 @Component
 public class ClubDomain {
-    @Autowired
-    private final ClubRepository clubRepository;
+
+    public ClubDomain() {
+    }
 
     public ClubDomain(ClubRepository clubRepository) {
         this.clubRepository = clubRepository;
     }
+
+    private ClubRepository clubRepository;
+
 
     public List<Club> search(String location, String category) {
         return clubRepository.findAllByCategoryAndLocation(location, category);
