@@ -31,4 +31,10 @@ public class ClubController {
         Long id = clubService.registerClub(registerClub);
         return ResponseEntity.ok(id);
     }
+
+    @PostMapping("/join/{clubId}")
+    public ResponseEntity<?> joinClub(@PathVariable Long clubId) {
+        clubService.join(clubId);
+        return ResponseEntity.ok().build();
+    }
 }

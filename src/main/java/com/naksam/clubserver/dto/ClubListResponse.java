@@ -1,6 +1,6 @@
 package com.naksam.clubserver.dto;
 
-import com.naksam.clubserver.domain.Club;
+import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.objects.ClubName;
 import lombok.Getter;
 
