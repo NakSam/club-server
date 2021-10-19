@@ -1,5 +1,7 @@
 package com.naksam.clubserver.domain;
 
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,9 +29,9 @@ public class Club {
 
     private Long maxMemberNum;
 
-    private String category;
+    private Category category;
 
-    private String location;
+    private Location location;
 
     public Long id() {
         return id;

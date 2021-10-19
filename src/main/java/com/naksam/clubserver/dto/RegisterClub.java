@@ -1,6 +1,8 @@
 package com.naksam.clubserver.dto;
 
 import com.naksam.clubserver.domain.Club;
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 import lombok.Data;
 
 @Data
@@ -22,8 +24,8 @@ public class RegisterClub {
                 .name(name)
                 .memberNum(memberNum)
                 .maxMemberNum(maxMemberNum)
-                .category(category)
-                .location(location)
+                .category(Category.fromString(category))
+                .location(Location.fromString(location))
                 .build();
     }
 }

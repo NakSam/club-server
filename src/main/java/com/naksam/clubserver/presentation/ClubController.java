@@ -5,6 +5,7 @@ import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +15,13 @@ import java.util.List;
 public class ClubController {
     private ClubService clubService;
 
-    @GetMapping
-    public ResponseEntity<?> search(@RequestParam String location, @RequestParam String category) {
-        List<ClubListResponse> responses = clubService.search(location, category);
+    @GetMapping(params = {"location", "category", "clubname"})
+    public ResponseEntity<List<ClubListResponse>> search(
+            @RequestParam String location,
+            @RequestParam String category,
+            @RequestParam @Nullable String clubname
+    ) {
+        List<ClubListResponse> responses = clubService.search(location, category, clubname);
         return ResponseEntity.ok(responses);
     }
 

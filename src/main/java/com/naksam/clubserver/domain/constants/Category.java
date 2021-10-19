@@ -1,8 +1,10 @@
 package com.naksam.clubserver.domain.constants;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public enum Category {
+    ALL("전체"),
     SPORT("스포츠"),
     STUDY("스터디"),
     EAT("맛집탐방");
@@ -24,4 +26,7 @@ public enum Category {
                                 String.format("잘못된 카테고리 : %s.", categoryName)));
     }
 
+    public boolean isCategory(String categoryName) {
+        return this.categoryName.equals(categoryName);
+    }
 }

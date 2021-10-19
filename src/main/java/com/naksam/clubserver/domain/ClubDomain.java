@@ -1,6 +1,9 @@
 package com.naksam.clubserver.domain;
 
+import com.naksam.clubserver.data.ClubQueryRepository;
 import com.naksam.clubserver.data.ClubRepository;
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.dto.RegisterClub;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,8 +16,10 @@ public class ClubDomain {
 
     private ClubRepository clubRepository;
 
-    public List<Club> search(String location, String category) {
-        return clubRepository.findAllByCategoryAndLocation(location, category);
+    private ClubQueryRepository clubQueryRepository;
+
+    public List<Club> search(Location location, Category category, String clubname) {
+        return clubQueryRepository.search(location, category, clubname);
     }
 
     public Long registerClub(RegisterClub registerClub) {
