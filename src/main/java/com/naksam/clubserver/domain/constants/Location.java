@@ -1,4 +1,4 @@
-package com.naksam.clubserver.domain;
+package com.naksam.clubserver.domain.constants;
 
 import java.util.Arrays;
 
@@ -11,11 +11,11 @@ public enum Location {
 
     private final String locationName;
 
-    Location(String locationName){
+    Location(String locationName) {
         this.locationName = locationName;
     }
 
-    public String getLocationName(){
+    public String getLocationName() {
         return locationName;
     }
 
@@ -23,8 +23,6 @@ public enum Location {
         return Arrays.stream(values())
                 .filter(v -> v.locationName.equals(locationName))
                 .findFirst()
-                .orElseThrow(() ->
-                        new IllegalArgumentException(
-                                String.format("잘못된 위치 : %s.", locationName)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("잘못된 위치 : %s.", locationName)));
     }
 }

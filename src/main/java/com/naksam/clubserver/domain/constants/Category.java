@@ -1,4 +1,4 @@
-package com.naksam.clubserver.domain;
+package com.naksam.clubserver.domain.constants;
 
 import java.util.Arrays;
 
