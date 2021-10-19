@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubController {
     private ClubService clubService;
 
