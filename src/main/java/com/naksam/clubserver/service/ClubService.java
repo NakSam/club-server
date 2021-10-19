@@ -27,4 +27,8 @@ public class ClubService {
     public Long registerClub(RegisterClub registerClub) {
         return clubDomain.registerClub(registerClub);
     }
+
+    public void join(Long clubId) {
+        clubDomain.join(clubId);
+    }
 }
