@@ -39,7 +39,7 @@ public class ClubDomain {
     }
 
     @Transactional
-    public void joinClub(Long clubId) {
+    public void join(Long clubId) {
         User user = User.builder()
                 .name("test")
                 .build();
