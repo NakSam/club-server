@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ClubName implements Serializable {
     private String name;
 
-    private final static int MIN_LENGTH = 5;
+    private final static int MIN_LENGTH = 3;
 
     private final static int MAX_LENGTH = 30;
 
