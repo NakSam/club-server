@@ -22,7 +22,7 @@ public class ClubService {
                 .collect(Collectors.toList());
     }
 
-    public void registerClub(RegisterClub registerClub) {
-        clubDomain.registerClub(registerClub);
+    public Long registerClub(RegisterClub registerClub) {
+        return clubDomain.registerClub(registerClub);
     }
 }

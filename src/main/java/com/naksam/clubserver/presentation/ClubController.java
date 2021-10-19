@@ -1,10 +1,9 @@
 package com.naksam.clubserver.presentation;
 
-import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +25,7 @@ public class ClubController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerClub(@RequestBody RegisterClub registerClub) {
-        clubService.registerClub(registerClub);
-        return ResponseEntity.ok()
-                .build();
+        Long id = clubService.registerClub(registerClub);
+        return ResponseEntity.ok(id);
     }
 }
