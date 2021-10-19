@@ -14,11 +14,8 @@ import java.util.List;
 public class ClubController {
     private ClubService clubService;
 
-    @GetMapping(params = {"location", "category"})
-    public ResponseEntity<List<ClubListResponse>> search(
-            @RequestParam String location,
-            @RequestParam String category
-    ) {
+    @GetMapping
+    public ResponseEntity<?> search(@RequestParam String location, @RequestParam String category) {
         List<ClubListResponse> responses = clubService.search(location, category);
         return ResponseEntity.ok(responses);
     }
