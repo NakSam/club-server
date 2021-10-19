@@ -10,8 +10,8 @@ data:
   DB_SERVER: mysql.mysql
   DB_PORT: "3306"
   DB_NAME: club
-  DB_USERNAME: user01
-  DB_PASSWORD: admin1234
+  DB_USERNAME: root
+  DB_PASSWORD: passw0rd
   # kafka
   KAFKA_BROKER: kafka.default
   KAFKA_BROKER_PORT: "9092"
