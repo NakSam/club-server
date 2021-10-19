@@ -18,8 +18,8 @@ public class ClubDomain {
 
     private ClubQueryRepository clubQueryRepository;
 
-    public List<Club> search(Location location, Category category, String clubname) {
-        return clubQueryRepository.search(location, category, clubname);
+    public List<Club> search(Location location, Category category, String clubName) {
+        return clubQueryRepository.search(location, category, clubName);
     }
 
     public Long registerClub(RegisterClub registerClub) {
