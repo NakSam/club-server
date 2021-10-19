@@ -28,9 +28,10 @@ public class Club implements Serializable {
 
     private MemberNumber memberNumber;
 
+    @Enumerated(value = EnumType.STRING)
     private Category category;
 
-    @Enumerated()
+    @Enumerated(value = EnumType.STRING)
     private Location location;
 
     @ManyToMany
