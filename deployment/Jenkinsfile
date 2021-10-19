@@ -91,7 +91,7 @@ podTemplate(
 				sh "ls -al"
 				container('maven') {
 						//sh "mvn -Dmaven.test.skip=true -B -f ${baseDir} clean package" - without test
-						sh "mvn -B -f ${baseDir} clean package" - without test
+						sh "mvn -B -f ${baseDir} clean package"
 						echo "*** RESULT ***"
 						sh "pwd"
 						sh "ls -al ${baseDir}/target"
