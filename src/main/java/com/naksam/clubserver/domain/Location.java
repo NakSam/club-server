@@ -11,11 +11,11 @@ public enum Location {
 
     private final String locationName;
 
-    Location(String locationName){
+    Location(String locationName) {
         this.locationName = locationName;
     }
 
-    public String getLocationName(){
+    public String getLocationName() {
         return locationName;
     }
 

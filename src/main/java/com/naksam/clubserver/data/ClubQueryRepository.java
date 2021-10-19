@@ -11,8 +11,4 @@ import org.springframework.stereotype.Repository;
 @NoArgsConstructor
 public class ClubQueryRepository {
     private JPAQueryFactory query;
-
-    public void test() {
-        query.selectFrom(QClub.club).fetch();
-    }
 }

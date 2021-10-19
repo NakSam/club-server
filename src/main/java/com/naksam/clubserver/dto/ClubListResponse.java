@@ -1,4 +1,4 @@
-package com.naksam.clubserver.service;
+package com.naksam.clubserver.dto;
 
 import com.naksam.clubserver.domain.Club;
 

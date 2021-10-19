@@ -1,20 +1,28 @@
 package com.naksam.clubserver.service;
 
-import java.util.List;
-
+import com.naksam.clubserver.domain.ClubDomain;
+import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.RegisterClub;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.naksam.clubserver.domain.ClubDomain;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ClubService {
-    private final ClubDomain clubDomain;
+    private ClubDomain clubDomain;
 
-    public ClubService(ClubDomain clubDomain) {
-        this.clubDomain = clubDomain;
+    public List<ClubListResponse> search(String location, String category) {
+        return clubDomain.search(location, category)
+                .stream()
+                .map(ClubListResponse::new)
+                .collect(Collectors.toList());
     }
 
-    public List<ClubListResponse> search(String location, String category){
-        return (List<ClubListResponse>)clubDomain.search(location, category).stream().map(ClubListResponse::new);
+    public void registerClub(RegisterClub registerClub) {
+        clubDomain.registerClub(registerClub);
     }
 }
