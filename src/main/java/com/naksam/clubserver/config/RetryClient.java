@@ -2,7 +2,7 @@ package com.naksam.clubserver.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "retry", url = "http://localhost:9000/", configuration = {FeignConfiguration.class, FeignRetryConfiguration.class})
+@FeignClient(value = "retry", url = "http://account:8080/", configuration = {FeignConfiguration.class, FeignRetryConfiguration.class})
 public interface RetryClient extends ExampleClient {
 
 }

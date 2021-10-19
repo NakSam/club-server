@@ -1,6 +1,7 @@
 package com.naksam.clubserver.presentation;
 
 import com.naksam.clubserver.config.ExampleClient;
+import com.naksam.clubserver.config.RetryClient;
 import com.naksam.clubserver.dto.ClubListResponse;
 import com.naksam.clubserver.dto.MemberPayload;
 import com.naksam.clubserver.dto.RegisterClub;
@@ -18,7 +19,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubController {
     private ClubService clubService;
-    private ExampleClient exampleClient;
+    private RetryClient exampleClient;
 
     @GetMapping(params = {"location", "category", "clubname"})
     public ResponseEntity<List<ClubListResponse>> search(
