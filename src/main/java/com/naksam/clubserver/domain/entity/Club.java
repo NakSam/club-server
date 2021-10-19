@@ -34,10 +34,6 @@ public class Club implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private Location location;
 
-    @ManyToMany
-    @JoinTable(name = "club_member")
-    private final List<User> users = new ArrayList<>();
-
     @Builder
     public Club(Long id, ClubName name, Long ownerId, MemberNumber memberNumber, Category category, Location location) {
         this.id = id;
@@ -46,10 +42,6 @@ public class Club implements Serializable {
         this.memberNumber = memberNumber;
         this.category = category;
         this.location = location;
-    }
-
-    public void addUser(User user) {
-        this.users.add(user);
     }
 
     public Long id() {
