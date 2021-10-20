@@ -6,6 +6,7 @@ import com.naksam.clubserver.dto.MemberPayload;
 import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,12 @@ public class ClubController {
         return ResponseEntity.ok(id);
     }
 
+    @Value("${ACCOUNT_HOST}")
+    public static String host;
+
     @PostMapping("/join/{clubId}")
     public ResponseEntity<?> joinClub(@PathVariable Long clubId, HttpServletRequest req) {
+        System.out.println("host");
         clubService.join(clubId, req);
         return ResponseEntity.ok()
                 .build();
