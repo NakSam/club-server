@@ -35,13 +35,9 @@ public class ClubService {
     }
 
     public void join(Long clubId, HttpServletRequest req) {
-        System.out.println(COOKIE_NAME);
-
         String token = HttpSupport.getCookie(req, COOKIE_NAME)
                 .orElseThrow(() -> new RuntimeException("쿠키가 없습니다"))
                 .getValue();
-
-        System.out.println(token);
 
         MemberPayload memberPayload = exampleClient.findInfo(new JsonWebToken(token));
 
