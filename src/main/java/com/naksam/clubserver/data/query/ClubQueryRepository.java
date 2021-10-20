@@ -4,6 +4,7 @@ import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.dto.ClubDetailResponse;
+import com.naksam.clubserver.dto.ClubListResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -20,7 +21,7 @@ import static com.naksam.clubserver.domain.entity.QClubUser.clubUser;
 public class ClubQueryRepository {
     private JPAQueryFactory query;
 
-    public ClubDetailResponse findClubDetail(Long clubId){
+    public ClubDetailResponse findClubDetail(Long clubId) {
         return query.select(Projections.constructor(ClubDetailResponse.class,
                         club.id,
                         club.name,
@@ -35,7 +36,8 @@ public class ClubQueryRepository {
                 ))
                 .from(club)
                 .where(clubIdEq(clubId))
-                .join(clubUser).on(club.id.eq(clubUser.id))
+                .join(clubUser)
+                .on(club.id.eq(clubUser.id))
                 .fetchFirst();
     }
 
@@ -44,16 +46,37 @@ public class ClubQueryRepository {
                 .where(
                         locationEq(location),
                         categoryEq(category),
-                        clubnameContains(clubName)
+                        clubNameContains(clubName)
                 )
                 .fetch();
+    }
+
+    public List<ClubListResponse> findByClub(Long id) {
+        return query.select(Projections.constructor(
+                                ClubListResponse.class,
+                                club.id,
+                                club.name,
+                                club.memberNumber,
+                                club.category,
+                                club.location
+                        )
+                )
+                .from(club)
+                .join(clubUser)
+                .on(club.eq(clubUser.club))
+                .where(clubUserUserEq(id))
+                .fetch();
+    }
+
+    private BooleanExpression clubUserUserEq(Long id) {
+        return clubUser.user.id.eq(id);
     }
 
     private BooleanExpression clubIdEq(Long clubId) {
         return club.id.eq(clubId);
     }
 
-    private BooleanExpression clubnameContains(String clubName) {
+    private BooleanExpression clubNameContains(String clubName) {
         if (clubName == null) {
             return null;
         }
@@ -73,5 +96,4 @@ public class ClubQueryRepository {
         }
         return club.category.eq(category);
     }
-
 }

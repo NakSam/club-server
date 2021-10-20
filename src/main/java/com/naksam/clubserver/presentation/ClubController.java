@@ -35,6 +35,12 @@ public class ClubController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/myClub")
+    public ResponseEntity<?> showByClubs(HttpServletRequest req) {
+        List<ClubListResponse> responses =clubService.showByClub(req);
+        return ResponseEntity.ok(responses);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerClub(@RequestBody RegisterClub registerClub) {
         Long id = clubService.registerClub(registerClub);

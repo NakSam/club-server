@@ -1,5 +1,7 @@
 package com.naksam.clubserver.dto;
 
+import com.naksam.clubserver.domain.constants.Category;
+import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.objects.ClubName;
 import com.naksam.clubserver.domain.objects.MemberNumber;
@@ -7,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 public class ClubListResponse {
-    private long id;
+    private Long id;
     private ClubName name;
     private MemberNumber maxMemberNum;
     private String category;
@@ -16,12 +18,12 @@ public class ClubListResponse {
     private ClubListResponse() {
     }
 
-    private ClubListResponse(long id, ClubName name, MemberNumber maxMemberNum, String category, String location) {
+    public ClubListResponse(Long id, ClubName name, MemberNumber maxMemberNum, Category category, Location location) {
         this.id = id;
         this.name = name;
         this.maxMemberNum = maxMemberNum;
-        this.category = category;
-        this.location = location;
+        this.category = category.getCategoryName();
+        this.location = location.getLocationName();
     }
 
     public ClubListResponse(Club club) {
