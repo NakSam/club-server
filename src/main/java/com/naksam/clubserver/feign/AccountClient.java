@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "example", url="${ACCOUNT_HOST:http://169.56.174.139/account}")
+@FeignClient(value = "example", url="${ACCOUNT_HOST:http://naksam.169.56.174.130.nip.io/account}")
 public interface AccountClient {
 
     @PostMapping(value = "/create")
