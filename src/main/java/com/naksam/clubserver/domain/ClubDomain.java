@@ -10,6 +10,7 @@ import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.entity.ClubUser;
 import com.naksam.clubserver.domain.entity.User;
 import com.naksam.clubserver.dto.ClubDetailResponse;
+import com.naksam.clubserver.dto.ClubListResponse;
 import com.naksam.clubserver.dto.InviteMembers;
 import com.naksam.clubserver.dto.RegisterClub;
 import lombok.AllArgsConstructor;
@@ -38,13 +39,17 @@ public class ClubDomain {
     public ClubDetailResponse getClubDetail(Long clubId){
         return clubQueryRepository.findClubDetail(clubId);
     }
+
+    public List<ClubListResponse> findMyClub(Long id) {
+        return clubQueryRepository.findByClub(id);
+    }
+
     public Long registerClub(RegisterClub registerClub) {
         Club club = registerClub.entity();
         return clubRepository.save(club)
                 .id();
     }
 
-    @Transactional
     public void join(Long clubId, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다"));
@@ -55,7 +60,6 @@ public class ClubDomain {
         registerClubUser(club, user);
     }
 
-    @Transactional
     public void inviteMember(InviteMembers inviteMembers, Long ownerId) {
         Club club = clubRepository.findById(inviteMembers.getClubId())
                 .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
