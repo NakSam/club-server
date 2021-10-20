@@ -153,7 +153,7 @@ podTemplate(
 					echo "**** Deploy START : " + stageName
 					
 					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${deployment}"
-					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${ingress}"
+// 					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${ingress}"
 					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${config}"
 					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${service}"
 					sh "kubectl set image deployment ${appname} ${containername}=${image}:${tag} -n ${namespace}"
