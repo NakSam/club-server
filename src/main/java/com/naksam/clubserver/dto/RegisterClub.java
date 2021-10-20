@@ -21,12 +21,18 @@ public class RegisterClub {
 
     private String location;
 
+    private String image;
+
+    private String description;
+
     public Club entity() {
         return Club.builder()
                 .name(new ClubName(name))
                 .memberNumber(new MemberNumber(maxMemberNum))
                 .category(Category.fromString(category))
                 .location(Location.fromString(location))
+                .image(image)
+                .description(description)
                 .build();
     }
 }
