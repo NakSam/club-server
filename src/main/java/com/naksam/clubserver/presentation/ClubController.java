@@ -1,9 +1,11 @@
 package com.naksam.clubserver.presentation;
 
+import com.naksam.clubserver.dto.ClubDetailResponse;
+import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.RegisterClub;
 import com.naksam.clubserver.dto.*;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,12 @@ public class ClubController {
     ) {
         List<ClubListResponse> responses = clubService.search(location, category, clubname);
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{clubId}")
+    public ResponseEntity<ClubDetailResponse> showClubDetail(@PathVariable Long clubId){
+        ClubDetailResponse response = clubService.showClubDetail(clubId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")

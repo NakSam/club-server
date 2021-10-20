@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.naksam.clubserver.domain.entity.Club;
+import com.naksam.clubserver.domain.entity.ClubUser;
 import com.naksam.clubserver.domain.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,6 +89,12 @@ public class InitData {
                     .build();
             em.persist(club);
 
+            ClubUser clubUser = ClubUser.builder()
+                    .club(club)
+                    .user(user1)
+                    .build();
+            em.persist(clubUser);
+
             Club club1 = Club.builder()
                     .name(new ClubName("KB 맛집탐방"))
                     .clubMaster(user2)
@@ -100,6 +107,12 @@ public class InitData {
                     .deleteYn(false)
                     .build();
             em.persist(club1);
+
+            ClubUser clubUser1 = ClubUser.builder()
+                    .club(club1)
+                    .user(user2)
+                    .build();
+            em.persist(clubUser1);
 
             Club club2 = Club.builder()
                     .name(new ClubName("KB 코딩스터디"))
@@ -114,6 +127,12 @@ public class InitData {
                     .build();
             em.persist(club2);
 
+            ClubUser clubUser2 = ClubUser.builder()
+                    .club(club2)
+                    .user(user3)
+                    .build();
+            em.persist(clubUser2);
+
             Club club3 = Club.builder()
                     .name(new ClubName("KB 야구단"))
                     .clubMaster(user4)
@@ -126,6 +145,12 @@ public class InitData {
                     .deleteYn(false)
                     .build();
             em.persist(club3);
+
+            ClubUser clubUser3 = ClubUser.builder()
+                    .club(club3)
+                    .user(user4)
+                    .build();
+            em.persist(clubUser3);
 
             User user = User.builder()
                     .name("tester")

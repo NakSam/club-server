@@ -9,6 +9,7 @@ import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.entity.ClubUser;
 import com.naksam.clubserver.domain.entity.User;
+import com.naksam.clubserver.dto.ClubDetailResponse;
 import com.naksam.clubserver.dto.InviteMembers;
 import com.naksam.clubserver.dto.RegisterClub;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,9 @@ public class ClubDomain {
         return clubQueryRepository.search(location, category, clubName);
     }
 
+    public ClubDetailResponse getClubDetail(Long clubId){
+        return clubQueryRepository.findClubDetail(clubId);
+    }
     public Long registerClub(RegisterClub registerClub) {
         Club club = registerClub.entity();
         return clubRepository.save(club)

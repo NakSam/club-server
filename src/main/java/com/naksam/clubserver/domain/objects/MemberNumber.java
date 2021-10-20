@@ -21,7 +21,7 @@ public class MemberNumber implements Serializable {
 
     private void validate(int count) {
         if (countIsLowerThanMin(count)) {
-            throw new RuntimeException("모임원의 최대 숫자는 최소 1명입니다");
+            throw new RuntimeException("모임원은 최소 1명이 필요합니다");
         }
     }
 
