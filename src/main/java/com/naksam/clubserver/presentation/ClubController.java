@@ -1,6 +1,5 @@
 package com.naksam.clubserver.presentation;
 
-import com.naksam.clubserver.feign.RetryClient;
 import com.naksam.clubserver.dto.ClubListResponse;
 import com.naksam.clubserver.dto.JsonWebToken;
 import com.naksam.clubserver.dto.MemberPayload;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -18,7 +18,6 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubController {
     private ClubService clubService;
-    private RetryClient exampleClient;
 
     @GetMapping(params = {"location", "category", "clubname"})
     public ResponseEntity<List<ClubListResponse>> search(
@@ -37,20 +36,9 @@ public class ClubController {
     }
 
     @PostMapping("/join/{clubId}")
-    public ResponseEntity<?> joinClub(@PathVariable Long clubId) {
-        clubService.join(clubId);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/createToken")
-    public ResponseEntity<?> createToken() {
-        Object response = exampleClient.request(new MemberPayload(1L, "test@test.com"));
-        return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/validateToken")
-    public ResponseEntity<?> validateToken(@RequestBody JsonWebToken jsonWebToken) {
-        Object response = exampleClient.request(jsonWebToken);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> joinClub(@PathVariable Long clubId, HttpServletRequest req) {
+        clubService.join(clubId, req);
+        return ResponseEntity.ok()
+                .build();
     }
 }

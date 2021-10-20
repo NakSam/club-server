@@ -6,12 +6,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "example", url = "http://169.56.174.139/account")
-public interface ExampleClient {
+@FeignClient(value = "example", url="${ACCOUNT_HOST:http://169.56.174.139/account}")
+public interface AccountClient {
 
     @PostMapping(value = "/create")
-    Object request(@RequestBody MemberPayload memberPayload);
+    Object createToken(@RequestBody MemberPayload memberPayload);
 
-    @PostMapping(value = "/validate")
-    Object request(@RequestBody JsonWebToken jsonWebToken);
+    @PostMapping(value = "/info")
+    MemberPayload findInfo(@RequestBody JsonWebToken jsonWebToken);
 }
