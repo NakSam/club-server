@@ -1,9 +1,6 @@
 package com.naksam.clubserver.presentation;
 
-import com.naksam.clubserver.dto.ClubListResponse;
-import com.naksam.clubserver.dto.JsonWebToken;
-import com.naksam.clubserver.dto.MemberPayload;
-import com.naksam.clubserver.dto.RegisterClub;
+import com.naksam.clubserver.dto.*;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +36,13 @@ public class ClubController {
     @PostMapping("/join/{clubId}")
     public ResponseEntity<?> joinClub(@PathVariable Long clubId, HttpServletRequest req) {
         clubService.join(clubId, req);
+        return ResponseEntity.ok()
+                .build();
+    }
+
+    @PostMapping("/invite")
+    public ResponseEntity<?> inviteMember(@RequestBody InviteMembers inviteMembers, HttpServletRequest req) {
+        clubService.inviteMember(inviteMembers, req);
         return ResponseEntity.ok()
                 .build();
     }

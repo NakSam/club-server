@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-public class ClubUser {
+public class ClubUser extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "club_user_id")

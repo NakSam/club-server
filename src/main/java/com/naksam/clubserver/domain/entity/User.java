@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-public class User {
+public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -25,5 +25,9 @@ public class User {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public boolean memberIsNotEqual(Long ownerId) {
+        return !this.id.equals(ownerId);
     }
 }
