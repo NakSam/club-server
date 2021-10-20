@@ -158,6 +158,19 @@ public class InitData {
                     .build();
 
             em.persist(user);
+
+            Club club4 = Club.builder()
+                    .name(new ClubName("KB 맛집탐방"))
+                    .clubMaster(user)
+                    .memberNumber(new MemberNumber(8))
+                    .category(Category.EAT)
+                    .location(Location.GANGBUKGU)
+                    .image("https://naksam.s3.ap-northeast-2.amazonaws.com/img/platter_1920.jpg")
+                    .dues(5000L)
+                    .description("KB 맛집탐방 모임입니다. 주 1회씩 다양한 맛집을 다니면서 스트레스 풀 사람~")
+                    .deleteYn(false)
+                    .build();
+            em.persist(club4);
         }
     }
 }
