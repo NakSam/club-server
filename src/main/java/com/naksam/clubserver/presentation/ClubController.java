@@ -36,12 +36,8 @@ public class ClubController {
         return ResponseEntity.ok(id);
     }
 
-    @Value("${ACCOUNT_HOST}")
-    public String host;
-
     @PostMapping("/join/{clubId}")
     public ResponseEntity<?> joinClub(@PathVariable Long clubId, HttpServletRequest req) {
-        System.out.println(host);
         clubService.join(clubId, req);
         return ResponseEntity.ok()
                 .build();

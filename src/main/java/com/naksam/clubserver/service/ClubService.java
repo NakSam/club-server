@@ -39,6 +39,8 @@ public class ClubService {
                 .orElseThrow(() -> new RuntimeException("쿠키가 없습니다"))
                 .getValue();
 
+        System.out.println(token);
+
         MemberPayload memberPayload = exampleClient.findInfo(new JsonWebToken(token));
 
         clubDomain.join(clubId, memberPayload.getId());
