@@ -24,5 +24,3 @@ spring:
       maximum-pool-size: 30
       minimum-idle: 2
       connection-test-query: SELECT 1
-
-ACCOUNT_HOST: ${ACCOUNT_HOST:http://account:8080/account}
