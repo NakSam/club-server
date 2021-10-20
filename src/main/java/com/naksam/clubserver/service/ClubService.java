@@ -4,13 +4,11 @@ import com.naksam.clubserver.common.HttpSupport;
 import com.naksam.clubserver.domain.ClubDomain;
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
-import com.naksam.clubserver.dto.ClubListResponse;
-import com.naksam.clubserver.dto.JsonWebToken;
-import com.naksam.clubserver.dto.MemberPayload;
-import com.naksam.clubserver.dto.RegisterClub;
+import com.naksam.clubserver.dto.*;
 import com.naksam.clubserver.feign.AccountRetryClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -30,17 +28,28 @@ public class ClubService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Long registerClub(RegisterClub registerClub) {
         return clubDomain.registerClub(registerClub);
     }
 
+    @Transactional
     public void join(Long clubId, HttpServletRequest req) {
+        MemberPayload memberPayload = getMemberPayload(req);
+        clubDomain.join(clubId, memberPayload.getId());
+    }
+
+    @Transactional
+    public void inviteMember(InviteMembers inviteMembers, HttpServletRequest req) {
+        MemberPayload memberPayload = getMemberPayload(req);
+        clubDomain.inviteMember(inviteMembers, memberPayload.getId());
+    }
+
+    private MemberPayload getMemberPayload(HttpServletRequest req) {
         String token = HttpSupport.getCookie(req, COOKIE_NAME)
                 .orElseThrow(() -> new RuntimeException("쿠키가 없습니다"))
                 .getValue();
 
-        MemberPayload memberPayload = exampleClient.findInfo(new JsonWebToken(token));
-
-        clubDomain.join(clubId, memberPayload.getId());
+        return exampleClient.findInfo(new JsonWebToken(token));
     }
 }

@@ -9,12 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @NoArgsConstructor
@@ -74,5 +69,15 @@ public class Club extends BaseTimeEntity{
 
     public Long id() {
         return id;
+    }
+
+    public void checkOwner(Long ownerId) {
+        if (ownerIsNotEqual(ownerId)) {
+            throw new RuntimeException("모임의 주인만 초대할 수 있습니다");
+        }
+    }
+
+    private boolean ownerIsNotEqual(Long ownerId) {
+        return clubMaster.memberIsNotEqual(ownerId);
     }
 }

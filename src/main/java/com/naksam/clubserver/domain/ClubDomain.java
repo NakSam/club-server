@@ -9,12 +9,14 @@ import com.naksam.clubserver.domain.constants.Location;
 import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.entity.ClubUser;
 import com.naksam.clubserver.domain.entity.User;
+import com.naksam.clubserver.dto.InviteMembers;
 import com.naksam.clubserver.dto.RegisterClub;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -46,11 +48,33 @@ public class ClubDomain {
         Club club = clubRepository.findById(clubId)
                 .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
 
-        ClubUser clubUser = ClubUser.builder()
+        registerClubUser(club, user);
+    }
+
+    @Transactional
+    public void inviteMember(InviteMembers inviteMembers, Long ownerId) {
+        Club club = clubRepository.findById(inviteMembers.getClubId())
+                .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
+
+        club.checkOwner(ownerId);
+
+        List<User> users = userRepository.findAllByEmailIn(inviteMembers.getEmails());
+
+        for (User user : users) {
+            registerClubUser(club, user);
+        }
+    }
+
+    private void registerClubUser(Club club, User user) {
+        Optional<ClubUser> clubUser = clubUserRepository.findByClubAndUser(club, user);
+        if (clubUser.isPresent()) {
+            return;
+        }
+
+        clubUserRepository.save(ClubUser.builder()
                 .club(club)
                 .user(user)
-                .build();
-
-        clubUserRepository.save(clubUser);
+                .build()
+        );
     }
 }
