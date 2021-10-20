@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.naksam.clubserver.domain.entity.Club;
+import com.naksam.clubserver.domain.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,6 +70,12 @@ public class InitData {
                     .build();
             em.persist(club3);
 
+            User user = User.builder()
+                    .name("tester")
+                    .email("test@test.com")
+                    .build();
+
+            em.persist(user);
         }
     }
 }

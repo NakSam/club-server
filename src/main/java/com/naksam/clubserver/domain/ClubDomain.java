@@ -39,11 +39,9 @@ public class ClubDomain {
     }
 
     @Transactional
-    public void join(Long clubId) {
-        User user = User.builder()
-                .name("test")
-                .build();
-        userRepository.save(user);
+    public void join(Long clubId, Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다"));
 
         Club club = clubRepository.findById(clubId)
                 .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
