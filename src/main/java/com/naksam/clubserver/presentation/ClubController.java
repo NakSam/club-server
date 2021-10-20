@@ -37,7 +37,7 @@ public class ClubController {
     }
 
     @Value("${ACCOUNT_HOST}")
-    public static String host;
+    public String host;
 
     @PostMapping("/join/{clubId}")
     public ResponseEntity<?> joinClub(@PathVariable Long clubId, HttpServletRequest req) {
