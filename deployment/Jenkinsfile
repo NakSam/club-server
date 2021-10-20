@@ -60,6 +60,9 @@ podTemplate(
 		def appname = props["appname"]
 		def containername = props["containername"]
 		def deployment = props["deployment"]
+		def ingress = props["ingress"]
+		def service = props["service"]
+		def config = props["config"]
 		def baseDir = props["baseDir"]
 		def baseDeployDir = props["baseDeployDir"]
 		def namespace = props["namespace"]
@@ -150,7 +153,10 @@ podTemplate(
 					echo "**** Deploy START : " + stageName
 					
 					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${deployment}"
-					sh "kubectl set image deployment ${appname} ${containername}=${image}:${tag} -n ${namespace}"					
+					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${ingress}"
+					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${config}"
+					sh "kubectl apply -n ${namespace} -f ${baseDir}${baseDeployDir}/${service}"
+					sh "kubectl set image deployment ${appname} ${containername}=${image}:${tag} -n ${namespace}"
 				}
 			}
 			
