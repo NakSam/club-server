@@ -15,14 +15,15 @@ public class User {
     private Long id;
 
     @Column(name = "name")
-    private String email;
-
     private String name;
 
+    @Column(name = "email")
+    private String email;
+
     @Builder
-    public User(Long id, String email, String name) {
+    public User(Long id, String name, String email) {
         this.id = id;
-        this.email = email;
         this.name = name;
+        this.email = email;
     }
 }
