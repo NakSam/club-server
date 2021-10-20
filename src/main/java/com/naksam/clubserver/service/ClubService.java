@@ -28,6 +28,10 @@ public class ClubService {
                 .collect(Collectors.toList());
     }
 
+    public ClubDetailResponse showClubDetail(Long clubId){
+        return clubDomain.getClubDetail(clubId);
+    }
+
     @Transactional
     public Long registerClub(RegisterClub registerClub) {
         return clubDomain.registerClub(registerClub);
