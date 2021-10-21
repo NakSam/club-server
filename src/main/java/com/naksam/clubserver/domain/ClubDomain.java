@@ -32,7 +32,7 @@ public class ClubDomain {
 
     private final ClubUserRepository clubUserRepository;
 
-    public List<Club> search(Location location, Category category, String clubName) {
+    public List<ClubListResponse> search(Location location, Category category, String clubName) {
         return clubQueryRepository.search(location, category, clubName);
     }
 
@@ -86,7 +86,7 @@ public class ClubDomain {
         );
     }
 
-    public List<Club> showNewClubs() {
-        return clubRepository.findTop5ByOrderByCreatedTimeDesc();
+    public List<ClubListResponse> getNewClubs() {
+        return clubQueryRepository.findNewClubs();
     }
 }

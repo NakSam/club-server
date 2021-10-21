@@ -22,10 +22,7 @@ public class ClubService {
     private static final String COOKIE_NAME = "naksam";
 
     public List<ClubListResponse> search(String location, String category, String clubname) {
-        return clubDomain.search(Location.fromString(location), Category.fromString(category), clubname)
-                .stream()
-                .map(ClubListResponse::new)
-                .collect(Collectors.toList());
+        return clubDomain.search(Location.fromString(location), Category.fromString(category), clubname);
     }
 
     public ClubDetailResponse showClubDetail(Long clubId){
@@ -64,6 +61,6 @@ public class ClubService {
     }
 
     public List<ClubListResponse> showNewClubs() {
-        return clubDomain.showNewClubs().stream().map(ClubListResponse::new).collect(Collectors.toList());
+        return clubDomain.getNewClubs();
     }
 }

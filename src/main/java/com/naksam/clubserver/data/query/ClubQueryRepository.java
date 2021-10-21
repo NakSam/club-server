@@ -2,7 +2,6 @@ package com.naksam.clubserver.data.query;
 
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
-import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.dto.ClubDetailResponse;
 import com.naksam.clubserver.dto.ClubListResponse;
 import com.querydsl.core.types.Projections;
@@ -38,11 +37,24 @@ public class ClubQueryRepository {
                 .where(clubIdEq(clubId))
                 .join(clubUser)
                 .on(club.id.eq(clubUser.id))
+                .groupBy(clubUser)
                 .fetchFirst();
     }
 
-    public List<Club> search(Location location, Category category, String clubName) {
-        return query.selectFrom(club)
+    public List<ClubListResponse> search(Location location, Category category, String clubName) {
+        return query.select(Projections.constructor(ClubListResponse.class,
+                        club.id,
+                        club.name,
+                        club.memberNumber,
+                        club.category,
+                        club.location,
+                        club.image,
+                        clubUser.count()
+                        ))
+                .from(club)
+                .join(clubUser)
+                .on(club.eq(clubUser.club))
+                .groupBy(clubUser)
                 .where(
                         locationEq(location),
                         categoryEq(category),
@@ -58,13 +70,37 @@ public class ClubQueryRepository {
                                 club.name,
                                 club.memberNumber,
                                 club.category,
-                                club.location
+                                club.location,
+                                club.image,
+                                clubUser.count()
                         )
                 )
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
+                .groupBy(clubUser)
                 .where(clubUserUserEq(id))
+                .fetch();
+    }
+
+    public List<ClubListResponse> findNewClubs() {
+        return query.select(Projections.constructor(
+                                ClubListResponse.class,
+                                club.id,
+                                club.name,
+                                club.memberNumber,
+                                club.category,
+                                club.location,
+                                club.image,
+                                clubUser.count()
+                        )
+                )
+                .from(club)
+                .join(clubUser)
+                .on(club.eq(clubUser.club))
+                .groupBy(clubUser.user)
+                .orderBy(club.createdTime.desc())
+                .limit(5)
                 .fetch();
     }
 

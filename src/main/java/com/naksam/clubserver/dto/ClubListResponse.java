@@ -14,16 +14,20 @@ public class ClubListResponse {
     private MemberNumber maxMemberNum;
     private String category;
     private String location;
+    private String image;
+    private Long memberNum;
 
     private ClubListResponse() {
     }
 
-    public ClubListResponse(Long id, ClubName name, MemberNumber maxMemberNum, Category category, Location location) {
+    public ClubListResponse(Long id, ClubName name, MemberNumber maxMemberNum, Category category, Location location, String image, Long memberNum) {
         this.id = id;
         this.name = name;
         this.maxMemberNum = maxMemberNum;
         this.category = category.getCategoryName();
         this.location = location.getLocationName();
+        this.image = image;
+        this.memberNum = memberNum;
     }
 
     public ClubListResponse(Club club) {
@@ -34,6 +38,19 @@ public class ClubListResponse {
                 .getCategoryName();
         this.location = club.getLocation()
                 .getLocationName();
+        this.image = club.getImage();
+    }
+
+    public ClubListResponse(Club club, Long memberNum) {
+        this.id = club.getId();
+        this.name = club.getName();
+        this.maxMemberNum = club.getMemberNumber();
+        this.category = club.getCategory()
+                .getCategoryName();
+        this.location = club.getLocation()
+                .getLocationName();
+        this.image = club.getImage();
+        this.memberNum = memberNum;
     }
 
     public String getName() {
