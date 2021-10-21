@@ -61,4 +61,8 @@ public class ClubService {
 
         return exampleClient.findInfo(new JsonWebToken(token));
     }
+
+    public List<ClubListResponse> showNewClubs() {
+        return clubDomain.showNewClubs().stream().map(ClubListResponse::new).collect(Collectors.toList());
+    }
 }

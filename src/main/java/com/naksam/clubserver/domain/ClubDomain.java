@@ -85,4 +85,8 @@ public class ClubDomain {
                 .build()
         );
     }
+
+    public List<Club> showNewClubs() {
+        return clubRepository.findTop5ByOrderByCreatedTimeDesc();
+    }
 }
