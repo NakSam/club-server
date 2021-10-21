@@ -2,8 +2,8 @@ package com.naksam.clubserver.presentation;
 
 import com.naksam.clubserver.dto.ClubDetailResponse;
 import com.naksam.clubserver.dto.ClubListResponse;
+import com.naksam.clubserver.dto.InviteMembers;
 import com.naksam.clubserver.dto.RegisterClub;
-import com.naksam.clubserver.dto.*;
 import com.naksam.clubserver.service.ClubService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ClubController {
     private ClubService clubService;
 
-    @GetMapping(params = {"location", "category", "clubname"})
+    @GetMapping(path = "/search", params = {"location", "category", "clubname"})
     public ResponseEntity<List<ClubListResponse>> search(
             @RequestParam String location,
             @RequestParam String category,
@@ -29,15 +29,15 @@ public class ClubController {
         return ResponseEntity.ok(responses);
     }
 
-    @GetMapping("/{clubId}")
-    public ResponseEntity<ClubDetailResponse> showClubDetail(@PathVariable Long clubId){
+    @GetMapping("/search/{clubId}")
+    public ResponseEntity<ClubDetailResponse> showClubDetail(@PathVariable Long clubId) {
         ClubDetailResponse response = clubService.showClubDetail(clubId);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/myClub")
     public ResponseEntity<?> showByClubs(HttpServletRequest req) {
-        List<ClubListResponse> responses =clubService.showByClub(req);
+        List<ClubListResponse> responses = clubService.showByClub(req);
         return ResponseEntity.ok(responses);
     }
 
