@@ -32,9 +32,10 @@ public class ClubService {
         return clubDomain.getClubDetail(clubId);
     }
 
-    public List<ClubListResponse> showByClub(HttpServletRequest req) {
-        MemberPayload memberPayload = getMemberPayload(req);
-        return clubDomain.findMyClub(memberPayload.getId());
+    public List<ClubListResponse> showMyClub(HttpServletRequest req) {
+//        MemberPayload memberPayload = getMemberPayload(req);
+//        return clubDomain.findMyClub(memberPayload.getId());
+        return clubDomain.findMyClub(1L);
     }
 
     @Transactional

@@ -42,8 +42,8 @@ public class ClubController {
     }
 
     @GetMapping("/myClub")
-    public ResponseEntity<?> showByClubs(HttpServletRequest req) {
-        List<ClubListResponse> responses = clubService.showByClub(req);
+    public ResponseEntity<?> showMyClub(HttpServletRequest req) {
+        List<ClubListResponse> responses = clubService.showMyClub(req);
         return ResponseEntity.ok(responses);
     }
 
