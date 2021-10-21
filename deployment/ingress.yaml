@@ -33,3 +33,10 @@ spec:
                 name: user
                 port:
                   number: 8080
+          - path: /wallet
+            pathType: Prefix
+            backend:
+              service:
+                name: wallet
+                port:
+                  number: 8080
