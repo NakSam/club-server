@@ -30,4 +30,8 @@ public class User extends BaseTimeEntity {
     public boolean memberIsNotEqual(Long ownerId) {
         return !this.id.equals(ownerId);
     }
+
+    public Long id() {
+        return id;
+    }
 }
