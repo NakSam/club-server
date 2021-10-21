@@ -11,7 +11,6 @@ import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.entity.ClubUser;
 import com.naksam.clubserver.domain.entity.User;
 import com.naksam.clubserver.dto.*;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -97,7 +96,7 @@ public class ClubDomain {
         return clubQueryRepository.findNewClubs();
     }
 
-    public int transfer(JoinClubMessage joinClubMessage) {
+    private void transfer(JoinClubMessage joinClubMessage) {
         Gson gson = new Gson();
         System.out.println("kafka send");
         try {
@@ -107,7 +106,5 @@ public class ClubDomain {
             System.out.println("ERROR");
             throw new RuntimeException(e);
         }
-
-        return 0;
     }
 }
