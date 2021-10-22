@@ -40,3 +40,10 @@ spec:
                 name: wallet
                 port:
                   number: 8080
+          - path: /funlife
+            pathType: Prefix
+            backend:
+              service:
+                name: funlife
+                port:
+                  number: 8080
