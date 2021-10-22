@@ -1,8 +1,9 @@
 package com.naksam.clubserver.dto;
 
-import com.naksam.clubserver.domain.entity.Club;
 import com.naksam.clubserver.domain.constants.Category;
 import com.naksam.clubserver.domain.constants.Location;
+import com.naksam.clubserver.domain.entity.Club;
+import com.naksam.clubserver.domain.entity.User;
 import com.naksam.clubserver.domain.objects.ClubName;
 import com.naksam.clubserver.domain.objects.MemberNumber;
 import lombok.Data;
@@ -10,10 +11,6 @@ import lombok.Data;
 @Data
 public class RegisterClub {
     private String name;
-
-    private Long ownerId;
-
-    private Integer memberNum;
 
     private Integer maxMemberNum;
 

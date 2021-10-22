@@ -24,13 +24,9 @@ import java.util.Optional;
 public class ClubDomain {
 
     private final ClubRepository clubRepository;
-
     private final ClubQueryRepository clubQueryRepository;
-
     private final UserRepository userRepository;
-
     private final ClubUserRepository clubUserRepository;
-
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Value("${bootcamp.club.topic}")
@@ -48,10 +44,18 @@ public class ClubDomain {
         return clubQueryRepository.findByClub(id);
     }
 
-    public Long registerClub(RegisterClub registerClub) {
-        Club club = registerClub.entity();
-        return clubRepository.save(club)
-                .id();
+    public Long registerClub(RegisterClub registerClub, MemberPayload memberPayload) {
+        User user = userRepository.findById(memberPayload.getId())
+                .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다"));
+
+        Club club = registerClub.entity()
+                .mapMaster(user);
+
+        clubRepository.save(club);
+
+        registerClubUser(club, user);
+
+        return club.id();
     }
 
     public void join(Long clubId, Long userId) {

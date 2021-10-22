@@ -36,8 +36,9 @@ public class ClubService {
     }
 
     @Transactional
-    public Long registerClub(RegisterClub registerClub) {
-        return clubDomain.registerClub(registerClub);
+    public Long registerClub(RegisterClub registerClub, HttpServletRequest req) {
+        MemberPayload memberPayload = getMemberPayload(req);
+        return clubDomain.registerClub(registerClub, memberPayload);
     }
 
     @Transactional

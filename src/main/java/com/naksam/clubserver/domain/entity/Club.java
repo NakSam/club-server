@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Club extends BaseTimeEntity{
+public class Club extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "club_id")
@@ -52,7 +52,7 @@ public class Club extends BaseTimeEntity{
     private Boolean deleteYn;
 
     @Builder
-    public Club(Long id, ClubName name, User clubMaster, MemberNumber memberNumber, Category category, Location location, String image, Long dues,  String description, Boolean deleteYn, LocalDateTime createdTime, LocalDateTime modifiedTime ) {
+    public Club(Long id, ClubName name, User clubMaster, MemberNumber memberNumber, Category category, Location location, String image, Long dues, String description, Boolean deleteYn, LocalDateTime createdTime, LocalDateTime modifiedTime) {
         this.id = id;
         this.name = name;
         this.clubMaster = clubMaster;
@@ -79,5 +79,10 @@ public class Club extends BaseTimeEntity{
 
     private boolean ownerIsNotEqual(Long ownerId) {
         return clubMaster.memberIsNotEqual(ownerId);
+    }
+
+    public Club mapMaster(User user) {
+        this.clubMaster = user;
+        return this;
     }
 }

@@ -48,8 +48,8 @@ public class ClubController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerClub(@RequestBody RegisterClub registerClub) {
-        Long id = clubService.registerClub(registerClub);
+    public ResponseEntity<?> registerClub(@RequestBody RegisterClub registerClub, HttpServletRequest req) {
+        Long id = clubService.registerClub(registerClub, req);
         return ResponseEntity.ok(id);
     }
 
