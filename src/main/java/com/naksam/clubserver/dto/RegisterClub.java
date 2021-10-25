@@ -22,6 +22,8 @@ public class RegisterClub {
 
     private String description;
 
+    private Long amount;
+
     public Club entity() {
         return Club.builder()
                 .name(new ClubName(name))

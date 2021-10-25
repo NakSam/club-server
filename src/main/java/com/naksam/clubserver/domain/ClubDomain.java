@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,8 +30,13 @@ public class ClubDomain {
     private final ClubUserRepository clubUserRepository;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${bootcamp.club.topic}")
-    private String topic;
+    @Value("${bootcamp.club.join}")
+    private String join;
+
+    @Value("${bootcamp.club.create}")
+    private String create;
+
+    private final Gson gson = new Gson();
 
     public List<ClubListResponse> search(Location location, Category category, String clubName) {
         return clubQueryRepository.search(location, category, clubName);
@@ -44,6 +50,7 @@ public class ClubDomain {
         return clubQueryRepository.findByClub(id);
     }
 
+    @Transactional
     public Long registerClub(RegisterClub registerClub, MemberPayload memberPayload) {
         User user = userRepository.findById(memberPayload.getId())
                 .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다"));
@@ -54,10 +61,12 @@ public class ClubDomain {
         clubRepository.save(club);
 
         registerClubUser(club, user);
+        transferCreateMessage(new CreateClubMessage(user.id(), club.id(), club.name(), registerClub.getAmount()));
 
         return club.id();
     }
 
+    @Transactional
     public void join(Long clubId, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("등록된 사용자가 없습니다"));
@@ -66,8 +75,10 @@ public class ClubDomain {
                 .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
 
         registerClubUser(club, user);
+        transferJoinMessage(new JoinClubMessage(user.id(), club.id()));
     }
 
+    @Transactional
     public void inviteMember(InviteMembers inviteMembers, Long ownerId) {
         Club club = clubRepository.findById(inviteMembers.getClubId())
                 .orElseThrow(() -> new RuntimeException("클럽이 존재하지 않습니다"));
@@ -78,6 +89,7 @@ public class ClubDomain {
 
         for (User user : users) {
             registerClubUser(club, user);
+            transferJoinMessage(new JoinClubMessage(user.id(), club.id()));
         }
     }
 
@@ -86,8 +98,6 @@ public class ClubDomain {
         if (clubUser.isPresent()) {
             return;
         }
-
-        transfer(new JoinClubMessage(user.id(), club.id()));
 
         clubUserRepository.save(ClubUser.builder()
                 .club(club)
@@ -100,12 +110,22 @@ public class ClubDomain {
         return clubQueryRepository.findNewClubs();
     }
 
-    private void transfer(JoinClubMessage joinClubMessage) {
-        Gson gson = new Gson();
+    private void transferCreateMessage(CreateClubMessage createClubMessage) {
+        System.out.println("kafka send");
+        try {
+            String message = gson.toJson(createClubMessage);
+            kafkaTemplate.send(create, message);
+        } catch (Exception e) {
+            System.out.println("ERROR");
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void transferJoinMessage(JoinClubMessage joinClubMessage) {
         System.out.println("kafka send");
         try {
             String message = gson.toJson(joinClubMessage);
-            kafkaTemplate.send(topic, message);
+            kafkaTemplate.send(join, message);
         } catch (Exception e) {
             System.out.println("ERROR");
             throw new RuntimeException(e);

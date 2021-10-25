@@ -71,6 +71,10 @@ public class Club extends BaseTimeEntity {
         return id;
     }
 
+    public String name() {
+        return name.content();
+    }
+
     public void checkOwner(Long ownerId) {
         if (ownerIsNotEqual(ownerId)) {
             throw new RuntimeException("모임의 주인만 초대할 수 있습니다");
