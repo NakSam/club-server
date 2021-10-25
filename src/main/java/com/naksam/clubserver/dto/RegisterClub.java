@@ -31,6 +31,8 @@ public class RegisterClub {
                 .category(Category.fromString(category))
                 .location(Location.fromString(location))
                 .image(image)
+                .dues(amount)
+                .deleteYn(false)
                 .description(description)
                 .build();
     }
