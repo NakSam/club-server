@@ -101,7 +101,8 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .orderBy(club.createdTime.desc())
                 .limit(5)
                 .fetch();
