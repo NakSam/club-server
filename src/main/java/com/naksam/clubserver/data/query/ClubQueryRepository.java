@@ -34,11 +34,19 @@ public class ClubQueryRepository {
                         club.description
                 ))
                 .from(club)
-                .where(clubIdEq(clubId))
                 .join(clubUser)
-                .on(club.id.eq(clubUser.id))
-                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                .on(club.eq(clubUser.club))
+                .groupBy(club.id,
+                        club.name,
+                        club.clubMaster.name,
+                        club.memberNumber,
+                        club.category,
+                        club.location,
+                        club.image,
+                        club.dues,
+                        club.description
                 )
+                .where(clubIdEq(clubId))
                 .fetchFirst();
     }
 
