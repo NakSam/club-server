@@ -11,6 +11,8 @@ import lombok.Getter;
 public class ClubListResponse {
     private Long id;
     private ClubName name;
+    private Long clubMasterId;
+    private String clubMasterName;
     private MemberNumber maxMemberNum;
     private String category;
     private String location;
@@ -20,9 +22,11 @@ public class ClubListResponse {
     private ClubListResponse() {
     }
 
-    public ClubListResponse(Long id, ClubName name, MemberNumber maxMemberNum, Category category, Location location, String image, Long memberNum) {
+    public ClubListResponse(Long id, ClubName name, Long clubMasterId, String clubMasterName, MemberNumber maxMemberNum, Category category, Location location, String image, Long memberNum) {
         this.id = id;
         this.name = name;
+        this.clubMasterId = clubMasterId;
+        this.clubMasterName = clubMasterName;
         this.maxMemberNum = maxMemberNum;
         this.category = category.getCategoryName();
         this.location = location.getLocationName();
