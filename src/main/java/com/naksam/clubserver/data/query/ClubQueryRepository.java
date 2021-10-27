@@ -37,7 +37,8 @@ public class ClubQueryRepository {
                 .where(clubIdEq(clubId))
                 .join(clubUser)
                 .on(club.id.eq(clubUser.id))
-                .groupBy(clubUser)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .fetchFirst();
     }
 
@@ -54,7 +55,8 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .where(
                         locationEq(location),
                         categoryEq(category),
