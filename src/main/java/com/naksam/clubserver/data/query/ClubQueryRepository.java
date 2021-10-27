@@ -60,6 +60,7 @@ public class ClubQueryRepository {
                         categoryEq(category),
                         clubNameContains(clubName)
                 )
+                .orderBy(club.createdTime.desc())
                 .fetch();
     }
 
@@ -98,7 +99,7 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser.user)
+                .groupBy(clubUser)
                 .orderBy(club.createdTime.desc())
                 .limit(5)
                 .fetch();
