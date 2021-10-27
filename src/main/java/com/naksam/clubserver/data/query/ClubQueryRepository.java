@@ -24,6 +24,7 @@ public class ClubQueryRepository {
         return query.select(Projections.constructor(ClubDetailResponse.class,
                         club.id,
                         club.name,
+                        club.clubMaster.id,
                         club.clubMaster.name,
                         club.memberNumber,
                         clubUser.count(),

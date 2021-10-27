@@ -10,6 +10,7 @@ import lombok.Getter;
 public class ClubDetailResponse {
     private long id;
     private ClubName name;
+    private Long clubMasterId;
     private String clubMaster;
     private MemberNumber maxMemberNum;
     private Long memberNum;
@@ -22,11 +23,12 @@ public class ClubDetailResponse {
     public ClubDetailResponse() {
     }
 
-    public ClubDetailResponse(long id, ClubName name, String clubMaster, MemberNumber maxMemberNum,
-            Long memberNum, Category category, Location location, String image, Long dues,
-            String description) {
+    public ClubDetailResponse(long id, ClubName name, Long clubMasterId, String clubMaster, MemberNumber maxMemberNum,
+                              Long memberNum, Category category, Location location, String image, Long dues,
+                              String description) {
         this.id = id;
         this.name = name;
+        this.clubMasterId = clubMasterId;
         this.clubMaster = clubMaster;
         this.maxMemberNum = maxMemberNum;
         this.memberNum = memberNum;
