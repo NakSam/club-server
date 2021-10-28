@@ -2,13 +2,20 @@ package com.naksam.clubserver.common;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public class HttpSupport {
     public static Optional<Cookie> getCookie(HttpServletRequest req, String name) {
-        String naksam = req.getHeader("naksam");
-        System.out.println(naksam);
+        Enumeration<String> headerNames = req.getHeaderNames();
+
+        while (headerNames.hasMoreElements()) {
+            String element = headerNames.nextElement();
+            System.out.println(req.getHeader(element));
+        }
+
+
         return Stream.of(req.getCookies())
                 .filter(cookie -> name.equals(cookie.getName()) && !cookie.getValue()
                         .isEmpty())
