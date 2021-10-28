@@ -35,10 +35,19 @@ public class ClubQueryRepository {
                         club.description
                 ))
                 .from(club)
-                .where(clubIdEq(clubId))
                 .join(clubUser)
-                .on(club.id.eq(clubUser.id))
-                .groupBy(clubUser)
+                .on(club.eq(clubUser.club))
+                .groupBy(club.id,
+                        club.name,
+                        club.clubMaster.name,
+                        club.memberNumber,
+                        club.category,
+                        club.location,
+                        club.image,
+                        club.dues,
+                        club.description
+                )
+                .where(clubIdEq(clubId))
                 .fetchFirst();
     }
 
@@ -57,12 +66,14 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .where(
                         locationEq(location),
                         categoryEq(category),
                         clubNameContains(clubName)
                 )
+                .orderBy(club.createdTime.desc())
                 .fetch();
     }
 
@@ -81,7 +92,8 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .where(clubUserUserEq(id))
                 .fetch();
     }
@@ -101,7 +113,8 @@ public class ClubQueryRepository {
                 .from(club)
                 .join(clubUser)
                 .on(club.eq(clubUser.club))
-                .groupBy(clubUser.user)
+                .groupBy(club.id, club.name, club.memberNumber, club.category, club.location, club.image
+                )
                 .orderBy(club.createdTime.desc())
                 .limit(5)
                 .fetch();
