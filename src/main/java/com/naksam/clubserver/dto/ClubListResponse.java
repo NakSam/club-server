@@ -34,6 +34,7 @@ public class ClubListResponse {
         this.memberNum = memberNum;
     }
 
+
     public ClubListResponse(Club club) {
         this.id = club.getId();
         this.name = club.getName();
