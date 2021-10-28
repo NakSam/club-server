@@ -50,6 +50,8 @@ public class ClubService {
     @Transactional
     public void inviteMember(InviteMembers inviteMembers, HttpServletRequest req) {
         MemberPayload memberPayload = getMemberPayload(req);
+        String token = HttpSupport.getToken(req, COOKIE_NAME);
+        System.out.println("token : " + token);
         clubDomain.inviteMember(inviteMembers, memberPayload.getId());
     }
 
@@ -59,8 +61,6 @@ public class ClubService {
 //                .getValue();
 
         String token = HttpSupport.getToken(req, COOKIE_NAME);
-
-        System.out.println(token);
 
         return exampleClient.findInfo(new JsonWebToken(token));
     }
