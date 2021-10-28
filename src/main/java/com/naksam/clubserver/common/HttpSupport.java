@@ -7,12 +7,16 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class HttpSupport {
+//    public static  String getToken(HttpServletRequest req, String name) {
+//        req.getHeader()
+//    }
+
     public static Optional<Cookie> getCookie(HttpServletRequest req, String name) {
         Enumeration<String> headerNames = req.getHeaderNames();
 
         while (headerNames.hasMoreElements()) {
             String element = headerNames.nextElement();
-            System.out.println(req.getHeader(element));
+            System.out.println(element + " : " + req.getHeader(element));
         }
 
         for (Cookie cookie : req.getCookies()) {
