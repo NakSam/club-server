@@ -60,6 +60,8 @@ public class ClubService {
 
         String token = HttpSupport.getToken(req, COOKIE_NAME);
 
+        System.out.println(token);
+
         return exampleClient.findInfo(new JsonWebToken(token));
     }
 
