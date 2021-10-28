@@ -7,9 +7,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class HttpSupport {
-//    public static  String getToken(HttpServletRequest req, String name) {
-//        req.getHeader()
-//    }
+    public static  String getToken(HttpServletRequest req, String name) {
+        return getAuthorizationToken(req).get();
+    }
 
     public static Optional<Cookie> getCookie(HttpServletRequest req, String name) {
         Enumeration<String> headerNames = req.getHeaderNames();
@@ -28,5 +28,10 @@ public class HttpSupport {
                 .filter(cookie -> name.equals(cookie.getName()) && !cookie.getValue()
                         .isEmpty())
                 .findFirst();
+    }
+
+    private static Optional<String> getAuthorizationToken(HttpServletRequest req) {
+        return Optional.ofNullable(req.getHeader("authorization"))
+                .map(token -> token.replaceAll("Bearer", "").trim());
     }
 }

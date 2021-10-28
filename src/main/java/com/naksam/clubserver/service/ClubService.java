@@ -54,9 +54,11 @@ public class ClubService {
     }
 
     private MemberPayload getMemberPayload(HttpServletRequest req) {
-        String token = HttpSupport.getCookie(req, COOKIE_NAME)
-                .orElseThrow(() -> new RuntimeException("쿠키가 없습니다"))
-                .getValue();
+//        String token = HttpSupport.getCookie(req, COOKIE_NAME)
+//                .orElseThrow(() -> new RuntimeException("쿠키가 없습니다"))
+//                .getValue();
+
+        String token = HttpSupport.getToken(req, COOKIE_NAME);
 
         return exampleClient.findInfo(new JsonWebToken(token));
     }
