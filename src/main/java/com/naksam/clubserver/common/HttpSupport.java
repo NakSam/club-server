@@ -15,6 +15,10 @@ public class HttpSupport {
             System.out.println(req.getHeader(element));
         }
 
+        for (Cookie cookie : req.getCookies()) {
+            System.out.println(cookie);
+        }
+
 
         return Stream.of(req.getCookies())
                 .filter(cookie -> name.equals(cookie.getName()) && !cookie.getValue()
