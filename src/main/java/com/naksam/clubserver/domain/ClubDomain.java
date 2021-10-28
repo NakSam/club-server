@@ -47,7 +47,7 @@ public class ClubDomain {
     }
 
     public List<ClubListResponse> findMyClub(Long id) {
-        return clubQueryRepository.findByClub(id);
+        return clubQueryRepository.findMyClub(id);
     }
 
     @Transactional

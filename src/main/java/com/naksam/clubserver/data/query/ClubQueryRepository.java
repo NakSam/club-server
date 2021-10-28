@@ -77,11 +77,13 @@ public class ClubQueryRepository {
                 .fetch();
     }
 
-    public List<ClubListResponse> findByClub(Long id) {
+    public List<ClubListResponse> findMyClub(Long id) {
         return query.select(Projections.constructor(
                                 ClubListResponse.class,
                                 club.id,
                                 club.name,
+                                club.clubMaster.id,
+                                club.clubMaster.name,
                                 club.memberNumber,
                                 club.category,
                                 club.location,
@@ -103,6 +105,8 @@ public class ClubQueryRepository {
                                 ClubListResponse.class,
                                 club.id,
                                 club.name,
+                                club.clubMaster.id,
+                                club.clubMaster.name,
                                 club.memberNumber,
                                 club.category,
                                 club.location,
